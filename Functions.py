@@ -2,12 +2,15 @@ import os
 import string
 import math
 
-def list_of_files(directory, extension):
+def list_of_files(directory, extension): 
     files_names = []
     for filename in os.listdir(directory):
         if filename.endswith(extension):
             files_names.append(filename)
     return files_names
+
+directory = "./speeches"
+files_names = list_of_files(directory, "txt") #Get a list of files in a directory with a specific extension
 
 c = 2
 def president_name_exact(name_file):
@@ -22,23 +25,33 @@ def president_name_exact(name_file):
         president_name = president_name[:-4]    #remove ".txt"
     return president_name
 
+L=[]
+for i in files_names:
+    L.append(president_name_exact(i))
+print (L)
+
 c = 3
 def first_name_associate_name(president_name):
     if president_name == "Chirac":
         return ("Chirac","Jacques")
     elif president_name == "Hollande":
         return("Hollande","François")
-    elif president_name == "Mitterand":
-        return("Mitterans","François")
+    elif president_name == "Mitterrand":
+        return("Mitterrand","François")
     elif president_name == "Sarkozy":
         return("Sarkozy","Nicolas")
-    elif president_name == "Giscar dEstaing":
-        return("Giscar dEstaing","Valéry")
+    elif president_name == "Giscard dEstaing":
+        return("Giscard dEstaing","Valéry")
+    elif president_name == "Macron":
+        return ("Macron", "Emmanuel")
+
+L1=[]
+for i in L:
+    L1.append(first_name_associate_name(i))
+print (L1)
 
 c = 4
-def display_president_name(list_president):
-    for name in list_president:
-        print(name[1],name[0])
+
 
 c = 5
 def lower_case(file):
