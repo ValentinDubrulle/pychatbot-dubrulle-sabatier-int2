@@ -8,12 +8,13 @@ def n_function (c):
 
 
 
+def display_president_name(list_president):  # display de la fonction  first_name_associate_name (a intégrer dans le main)
+    for name in list_president:
+        print(name[1],name[0])
 
 
 
-directory = "./speeches"
-files_names = list_of_files(directory, "txt")
-list_tuple_president_name = []
+'''list_tuple_president_name = []
 for names in files_names:
     cleaned_name = president_name_exact(names)
     tuple_name = first_name_associate_name(cleaned_name)
@@ -128,4 +129,4 @@ for i in range(1,len(TF_IDF_matrix)):
         if total == total_occurence:
             word_used_by_all_president.append(TF_IDF_matrix[i][0])
 
-print("Words used by all the presidents are:",word_used_by_all_president)
+print("Words used by all the presidents are:",word_used_by_all_president)'''
