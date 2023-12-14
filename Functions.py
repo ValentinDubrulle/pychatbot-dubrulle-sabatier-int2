@@ -25,10 +25,6 @@ def president_name_exact(name_file):
         president_name = president_name[:-4]    #remove ".txt"
     return president_name
 
-L=[]
-for i in files_names:
-    L.append(president_name_exact(i))
-print (L)
 
 c = 3
 def first_name_associate_name(president_name):
@@ -45,36 +41,37 @@ def first_name_associate_name(president_name):
     elif president_name == "Macron":
         return ("Macron", "Emmanuel")
 
-L1=[]
-for i in L:
-    L1.append(first_name_associate_name(i))
-print (L1)
 
 c = 4
+def lower_case(files):
+    for file in files:
+        with open ("./speeches/"+ file, "r") as f1, open ("./cleaned/"+ file, "w") as f2:
+            lines = f1.readlines()
+            f1.closed
+            for line in lines:
+                cleaned_line = ""
+                for char in line:
+                    if ord(char)<=ord("Z") and ord(char)>=ord("A"):
+                        cleaned_line += chr(ord(char) + 32)
+                    else:
+                        cleaned_line += char
+                f2.write(cleaned_line) 
+           
 
+lower_case(files_names)
 
 c = 5
-def lower_case(file):
-    old_file = open(file,'r')
-    cleaned_text = ""
-    for char in old_file:
-        if ord(char)<=ord("Z") and ord(char)>=ord("A"):
-            cleaned_text += chr(ord(char) + 32)
-        else:
-            cleaned_text += char
-    file_name = os.path.basename(file)
-    new_file = os.path.join('/cleaned_speeches',file_name)
-    with open(new_file,'w') as file2:
-        file2.write(cleaned_text)
+def cleaned_file(files):
+    for file in files:
+        with open("./cleaned/"+file,'r') as file:
+            content = file.read()
+        ponctuation = string.punctuation
+        cleaning = ''.join(char for char in content if char not in ponctuation)
+        with open("./cleaned/" + file,'w') as file2:
+            file2.write(cleaning)
 
-c = 5
-def cleaned_file(file_path):
-    with open(file_path,'r') as file:
-        content = file.read()
-    ponctuation = string.punctuation
-    cleaning = ''.join(char for char in content if char not in ponctuation)
-    with open(file_path,'w') as file2:
-        file2.write(cleaning)
+cleaned_file(files_names)
+
 
 c = 6 
 def term_frequency(text,word_cpt):
