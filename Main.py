@@ -1,4 +1,16 @@
 from Functions import *
+
+
+
+def n_function (c):
+    print("Choose 1 for the display_president_name function ; 2 for the first_name_associate_name ; 3 for the lower_case ; 4 for the cleaned_file ; 5 for the term_frequency ; 6 inverse_document_frequency ; 7 for the tf_idf_matrix")
+    c = int(input("Wich functions do you want call ?")) #Let the user choose the function he needs
+
+
+
+
+
+
 directory = "./speeches"
 files_names = list_of_files(directory, "txt")
 list_tuple_president_name = []
