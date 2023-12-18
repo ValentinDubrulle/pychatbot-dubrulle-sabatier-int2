@@ -142,13 +142,13 @@ def tf_idf(dico_tf,dico_idf):
 
 tf_idf_matrix = tf_idf(tf_dico,idf_dico)
 
-def lower_question(char):
+def lower_question(char):  #Turns all uppercase letters into lowercase letters
     if ord(char)>=ord('A') and ord(char)<=ord('Z'):
         return chr(ord(char) + 32)
     else:
         return char
 
-def clean_question(text):
+def clean_question(text):  #Deletes or transforms special characters
     ponctuation = "!#$%&()*+,./:;<=>?@[\]^_`{|}~"
     special_case = "-'"
     special_chr = {"é": "e", "è": "e", "ê": "e", "ë": "e", "à": "a", "â": "a", "ä": "a", "î": "i", "ï": "i", "ù": "u", "û": "u", "ô": "o", "ö": "o", "ç": "c", "œ": "oe"}
@@ -165,10 +165,10 @@ def clean_question(text):
     question_word = cleaning.split()
     return question_word
 
-def present_terms_in_corpus(corpus,cleaned_question):
+def present_terms_in_corpus(corpus,cleaned_question):  #Check whether each of the words in the question is present in the corpus
     return [word for word in cleaned_question if word in corpus]
 
-def tf_question(cleaned_question):
+def tf_question(cleaned_question):  #Calculate the tf (term freqency) of each word in the question
     dico_question = {}
     for word in cleaned_question:
         if word in dico_question:
