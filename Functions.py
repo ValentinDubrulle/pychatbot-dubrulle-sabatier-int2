@@ -120,3 +120,30 @@ def tf_idf_matrix(directory,final_dictionary_word_cpt):
             matrix.append(row)
     return matrix
 
+def scalar_product(vector_A,vector_B):
+    tot = 0
+    for i in range(1,len(vector_A)):
+        tot += vector_A[i] * vector_B[i]
+    return tot
+
+def norm_of_vector(vector):
+    tot = 0
+    for i in range(1,len(vector)):
+        tot += (vector[i])**2
+    tot = math.sqrt(tot)
+    return tot
+
+def similarity(vector_A,vector_B):
+    return scalar_product(vector_A,vector_B)/(norm_of_vector(vector_A)*norm_of_vector(vector_B))
+
+def most_relevant_document(tf_idf_matrix,tf_idf_vector_question,list_of_file_names):
+    best = 0
+    index = None
+    for i in range(len(tf_idf_matrix)):
+        current_score = similarity(tf_idf_matrix[i],tf_idf_vector_question)
+        if current_score > best:
+            best = current_score
+            index = i
+    best_file_cleaned = list_of_file_names[index]
+    best_file_speeches = os.path.join("./speeches",best_file_cleaned)
+    return best_file_speeches
