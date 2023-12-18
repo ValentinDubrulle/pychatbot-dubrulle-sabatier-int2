@@ -26,7 +26,8 @@ def president_name_exact(name_file):
 
 
 
-def first_name_associate_name(president_name): #Asociates the last name of the president with his first name
+def first_name_associate_name(president_name):
+    '''Asociates the last name of the president with his first name'''
     if president_name == "Chirac":
         return ("Chirac","Jacques")
     elif president_name == "Hollande":
@@ -42,7 +43,8 @@ def first_name_associate_name(president_name): #Asociates the last name of the p
 
 
 
-def lower_case(files):  #Turns all uppercase letters into lowercase letters
+def lower_case(files):  
+    '''Turns all uppercase letters into lowercase letters'''
     for file in files:
         with open ("./speeches/"+ file, "r",encoding="utf-8") as f1:  #Open files in speeches. (UTF-8 for decoding special characters)
             lines = f1.readlines()
@@ -60,7 +62,8 @@ def lower_case(files):  #Turns all uppercase letters into lowercase letters
 lower_case(files_names)
 
 
-def cleaned_file(files):  #Deletes or transforms special characters
+def cleaned_file(files):  
+    '''Deletes or transforms special characters'''
     for file in files:
         ponctuation = "!#$%&()*+,./:;<=>?@[\]^_`{|}~"
         special_case = "-'"
@@ -85,7 +88,8 @@ cleaned_file(files_names)
 
 
 
-def total_word(files):  #Counts the iterations of a word in the file
+def total_word(files):  
+    '''Counts the iterations of a word in the file'''
     all_word = {} 
     for file in files:
         with open("./cleaned/" + file, "r",encoding="utf-8") as f:
@@ -99,7 +103,8 @@ def total_word(files):  #Counts the iterations of a word in the file
 corpus = total_word(files_names)
 
 
-def term_frequency(files,corpus):  '''Counts the occurrence of each word in the file'''
+def term_frequency(files,corpus):  
+    '''Counts the occurrence of each word in the file'''
     liste_of_dico = []
     for file in files:
         dico_of_word = {}
@@ -118,7 +123,8 @@ tf_dico = term_frequency(files_names,corpus)
 
 
 
-def inverse_document_frequency(list_of_dico,list_of_word):  #Create an IDF score 
+def inverse_document_frequency(list_of_dico,list_of_word):  
+    '''Create an IDF score''' 
     number_of_files = len(list_of_dico)
     idf_score = {}
     for word in list_of_word:
@@ -131,7 +137,8 @@ def inverse_document_frequency(list_of_dico,list_of_word):  #Create an IDF score
 
 idf_dico = inverse_document_frequency(tf_dico,corpus)
 
-def tf_idf(dico_tf,dico_idf):  #calculates the TF-IDF score for each word in each document and stores the result in a matrix
+def tf_idf(dico_tf,dico_idf):  
+    '''calculates the TF-IDF score for each word in each document and stores the result in a matrix'''
     matrix = []
     for word in dico_idf:
         row = [word]
@@ -142,13 +149,15 @@ def tf_idf(dico_tf,dico_idf):  #calculates the TF-IDF score for each word in eac
 
 tf_idf_matrix = tf_idf(tf_dico,idf_dico)
 
-def lower_question(char):  #Turns all uppercase letters into lowercase letters
+def lower_question(char):  
+    '''Turns all uppercase letters into lowercase letters'''
     if ord(char)>=ord('A') and ord(char)<=ord('Z'):
         return chr(ord(char) + 32)
     else:
         return char
 
-def clean_question(text):  #Deletes or transforms special characters
+def clean_question(text):  
+    '''Deletes or transforms special characters'''
     ponctuation = "!#$%&()*+,./:;<=>?@[\]^_`{|}~"
     special_case = "-'"
     special_chr = {"é": "e", "è": "e", "ê": "e", "ë": "e", "à": "a", "â": "a", "ä": "a", "î": "i", "ï": "i", "ù": "u", "û": "u", "ô": "o", "ö": "o", "ç": "c", "œ": "oe"}
@@ -165,10 +174,12 @@ def clean_question(text):  #Deletes or transforms special characters
     question_word = cleaning.split()
     return question_word
 
-def present_terms_in_corpus(corpus,cleaned_question):  #Check whether each of the words in the question is present in the corpus
+def present_terms_in_corpus(corpus,cleaned_question):  
+    '''Check whether each of the words in the question is present in the corpus'''
     return [word for word in cleaned_question if word in corpus]
 
-def tf_question(cleaned_question):  #Calculate the tf (term freqency) of each word in the question
+def tf_question(cleaned_question):  
+    '''Calculate the tf (term freqency) of each word in the question'''
     dico_question = {}
     for word in cleaned_question:
         if word in dico_question:
@@ -189,7 +200,8 @@ def tf_idf_question(tf_dico_question,dico_idf):
             vector.append(0)
     return vector
 
-def scalar_product(vector_A,vector_B): #calculates the scalar product between two vectors by multiplying the corresponding elements and adding these products together
+def scalar_product(vector_A,vector_B): 
+    '''calculates the scalar product between two vectors by multiplying the corresponding elements and adding these products together'''
     tot = 0
     for i in range(1,len(vector_A)):
         tot += vector_A[i] * vector_B[i]
