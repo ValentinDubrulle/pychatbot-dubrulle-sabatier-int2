@@ -118,7 +118,7 @@ tf_dico = term_frequency(files_names,corpus)
 
 
 
-def inverse_document_frequency(list_of_dico,list_of_word):  
+def inverse_document_frequency(list_of_dico,list_of_word):  #Create an IDF score 
     number_of_files = len(list_of_dico)
     idf_score = {}
     for word in list_of_word:
