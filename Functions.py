@@ -45,32 +45,35 @@ def first_name_associate_name(president_name):
 c = 4
 def lower_case(files):
     for file in files:
-        with open ("./speeches/"+ file, "r") as f1, open ("./cleaned/"+ file, "w") as f2:
+        with open ("./speeches/"+ file, "r") as f1:
             lines = f1.readlines()
-            f1.closed
+            cleaned_line = ""
             for line in lines:
-                cleaned_line = ""
                 for char in line:
                     if ord(char)<=ord("Z") and ord(char)>=ord("A"):
                         cleaned_line += chr(ord(char) + 32)
                     else:
                         cleaned_line += char
-                f2.write(cleaned_line) 
-           
+        with open ("./cleaned/"+ file, "w") as f2:
+            print("./cleaned/"+ file)
+            print(cleaned_line)
+            f2.write(cleaned_line) 
+
 
 lower_case(files_names)
 
 c = 5
 def cleaned_file(files):
     for file in files:
-        with open("./cleaned/"+file,'r') as file:
-            content = file.read()
+        with open("./cleaned/"+file,'r') as f:
+            content = f.read()
         ponctuation = string.punctuation
         cleaning = ''.join(char for char in content if char not in ponctuation)
-        with open("./cleaned/" + file,'w') as file2:
-            file2.write(cleaning)
+        with open("./cleaned/"+file,'w') as f2:
+            f2.write(cleaning)
 
 cleaned_file(files_names)
+
 
 
 c = 6 
@@ -119,31 +122,3 @@ def tf_idf_matrix(directory,final_dictionary_word_cpt):
                     row.append(0)
             matrix.append(row)
     return matrix
-
-def scalar_product(vector_A,vector_B):
-    tot = 0
-    for i in range(1,len(vector_A)):
-        tot += vector_A[i] * vector_B[i]
-    return tot
-
-def norm_of_vector(vector):
-    tot = 0
-    for i in range(1,len(vector)):
-        tot += (vector[i])**2
-    tot = math.sqrt(tot)
-    return tot
-
-def similarity(vector_A,vector_B):
-    return scalar_product(vector_A,vector_B)/(norm_of_vector(vector_A)*norm_of_vector(vector_B))
-
-def most_relevant_document(tf_idf_matrix,tf_idf_vector_question,list_of_file_names):
-    best = 0
-    index = None
-    for i in range(len(tf_idf_matrix)):
-        current_score = similarity(tf_idf_matrix[i],tf_idf_vector_question)
-        if current_score > best:
-            best = current_score
-            index = i
-    best_file_cleaned = list_of_file_names[index]
-    best_file_speeches = os.path.join("./speeches",best_file_cleaned)
-    return best_file_speeches
