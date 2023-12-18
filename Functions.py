@@ -131,7 +131,7 @@ def inverse_document_frequency(list_of_dico,list_of_word):  #Create an IDF score
 
 idf_dico = inverse_document_frequency(tf_dico,corpus)
 
-def tf_idf(dico_tf,dico_idf):
+def tf_idf(dico_tf,dico_idf):  #calculates the TF-IDF score for each word in each document and stores the result in a matrix
     matrix = []
     for word in dico_idf:
         row = [word]
@@ -189,7 +189,7 @@ def tf_idf_question(tf_dico_question,dico_idf):
             vector.append(0)
     return vector
 
-def scalar_product(vector_A,vector_B):
+def scalar_product(vector_A,vector_B): #calculates the scalar product between two vectors by multiplying the corresponding elements and adding these products together
     tot = 0
     for i in range(1,len(vector_A)):
         tot += vector_A[i] * vector_B[i]
