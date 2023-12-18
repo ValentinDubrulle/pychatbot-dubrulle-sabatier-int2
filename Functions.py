@@ -54,7 +54,7 @@ def lower_case(files):   #Convert upper case in lower case
                         cleaned_line += chr(ord(char) + 32)
                     else:
                         cleaned_line += char
-        with open ("./cleaned/"+ file, "w") as f2:     #Create a new file (f2) as a cleaned file (without upper case) for each files in speeches
+        with open ("./cleaned/"+ file, "w") as f2:     #Create a new file as a cleaned file (without upper case) for each files in speeches
             f2.write(cleaned_line)
 
 
