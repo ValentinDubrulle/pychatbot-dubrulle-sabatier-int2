@@ -36,35 +36,38 @@ file_name = choices[speeche_choice]
 print("Choose the function you want to use on the speech\n\
     1・president_name_exact \n\
     2・first_name_associate_name \n\
-    3・lower_case \n\
-    4・cleaned_file \n\
-    5・term_frequency \n\
-    6・inverse_document_frequency \n\
-    7・tf_idf_matrix")
+    3・cleaned_file \n\
+    4・term_frequency \n\
+    5・inverse_document_frequency \n\
+    6・tf_idf")
 function_choice = int(input("Enter the number here :"))
 
 while function_choice < 1 or function_choice > 8:
     print("Choose the function you want to use on the speech\n\
         1・president_name_exact \n\
         2・first_name_associate_name \n\
-        3・lower_case \n\
-        4・cleaned_file \n\
-        5・term_frequency \n\
-        6・inverse_document_frequency \n\
-        7・tf_idf_matrix")
+        3・cleaned_file \n\
+        4・term_frequency \n\
+        5・inverse_document_frequency \n\
+        6・tf_idf")
     function_choice = int(input("Enter the nuber here : "))
 
 if function_choice == 1 :
     print(president_name_exact(file_name))
 elif function_choice == 2 :
     print(first_name_associate_name(president_name_exact(file_name)))
-elif function_choice == 3:
-    filepath = os.path.join('cleaned', file_name)
+elif function_choice == 3:  
+    filepath = os.path.join('cleaned', file_name)  
     f = open(filepath, 'r')
-    print(f.read)
+    print(f.read())
 elif function_choice == 4:
-    cleaned_file()
-elif function_choice == 5:
-    term_frequency
-elif function_choice == 6:
-    tf_idf_matrix()
+    tf = tf_dico[speeche_choice]
+    tf_cleaned = {}
+    for word in tf:
+        if tf[word] != 0:
+            tf_cleaned[word] = tf[word]
+    for key,value in tf_cleaned.items():
+        print(key,value)
+    
+#elif function_choice == 5:
+#    tf_idf()
