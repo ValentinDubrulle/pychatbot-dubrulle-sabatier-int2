@@ -69,5 +69,5 @@ elif function_choice == 4:
     for key,value in tf_cleaned.items():
         print(key,value)
     
-#elif function_choice == 5:
-#    tf_idf()
+elif function_choice == 5:
+    tf_idf()
