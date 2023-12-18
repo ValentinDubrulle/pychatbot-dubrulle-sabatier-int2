@@ -131,8 +131,6 @@ def inverse_document_frequency(list_of_dico,list_of_word):
 
 idf_dico = inverse_document_frequency(tf_dico,corpus)
 
-
-
 def tf_idf(dico_tf,dico_idf):
     matrix = []
     for word in dico_idf:
@@ -143,3 +141,4 @@ def tf_idf(dico_tf,dico_idf):
     return matrix
 
 tf_idf_matrix = tf_idf(tf_dico,idf_dico)
+
