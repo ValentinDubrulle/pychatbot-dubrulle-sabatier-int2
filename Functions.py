@@ -192,6 +192,7 @@ def tf_question(cleaned_question):
     return dico_question
 
 def tf_idf_question(tf_dico_question,dico_idf):
+    '''Calculate the tf (term freqency) of each word in the question'''
     vector = []
     for word in dico_idf:
         if word in tf_dico_question:
