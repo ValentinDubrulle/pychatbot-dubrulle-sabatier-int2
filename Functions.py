@@ -45,7 +45,7 @@ def first_name_associate_name(president_name):  #Associate the name of the presi
 c = 4
 def lower_case(files):   #Convert upper case in lower case 
     for file in files:
-        with open ("./speeches/"+ file, "r") as f1:    #Open in read mode the different speeches 
+        with open ("./speeches/"+ file, "r") as f1:    #Open in read mode the different files in speeches 
             lines = f1.readlines()
             cleaned_line = ""
             for line in lines:
@@ -54,14 +54,14 @@ def lower_case(files):   #Convert upper case in lower case
                         cleaned_line += chr(ord(char) + 32)
                     else:
                         cleaned_line += char
-        with open ("./cleaned/"+ file, "w") as f2:     #Create a new file as a cleaned file (without upper case) for each files in speeches
+        with open ("./cleaned/"+ file, "w") as f2:     #Create a new file (f2) as a cleaned file (without upper case) for each files in speeches
             f2.write(cleaned_line)
 
 
 lower_case(files_names)
 
 c = 5
-def cleaned_file(files):
+def cleaned_file(files):    #Remove ponctuation and special character
     for file in files:
         ponctuation = "!#$%&()*+,./:;<=>?@[\]^_`{|}~"
         special_case = "-'"
@@ -70,7 +70,7 @@ def cleaned_file(files):
             content = f.read()
         cleaning = ''
         for char in content:
-            if char in ponctuation:
+            if char in ponctuation:     
                 cleaning += ''
             elif char in special_chr:
                 cleaning += special_chr[char]
@@ -78,7 +78,7 @@ def cleaned_file(files):
                 cleaning += ' '
             else:
                 cleaning += char
-        with open("./cleaned/"+file,'w') as f2:
+        with open("./cleaned/"+file,'w') as f2:     #Add modifications in cleaned file for each speeches
             f2.write(cleaning)
 
 cleaned_file(files_names)
