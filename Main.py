@@ -1,4 +1,5 @@
 from Functions import *
+from os import *
 
 
 choices = {1: "Nomination_Chirac1.txt", 2: "Nomination_Chirac2.txt", 3: "Nomination_Giscard dEstaing.txt", 4: "Nomination_Hollande.txt", 5: "Nomination_Macron.txt",\
@@ -59,7 +60,9 @@ if function_choice == 1 :
 elif function_choice == 2 :
     print(first_name_associate_name(president_name_exact(file_name)))
 elif function_choice == 3:
-    lower_case()
+    filepath = os.path.join('cleaned', file_name)
+    f = open(filepath, 'r')
+    print(f.read)
 elif function_choice == 4:
     cleaned_file()
 elif function_choice == 5:
