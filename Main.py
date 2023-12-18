@@ -37,19 +37,21 @@ print("Choose the function you want to use on the speech\n\
     1・president_name_exact \n\
     2・first_name_associate_name \n\
     3・cleaned_file \n\
-    4・term_frequency \n\
-    5・inverse_document_frequency \n\
-    6・tf_idf")
+    4・total_word \n\
+    5・term_frequency \n\
+    6・inverse_document_frequency \n\
+    7・tf_idf")
 function_choice = int(input("Enter the number here :"))
 
 while function_choice < 1 or function_choice > 8:
-    print("Choose the function you want to use on the speech\n\
-        1・president_name_exact \n\
-        2・first_name_associate_name \n\
-        3・cleaned_file \n\
-        4・term_frequency \n\
-        5・inverse_document_frequency \n\
-        6・tf_idf")
+    print("Choose the function you want to use on the speech \n\
+    1・president_name_exact \n\
+    2・first_name_associate_name \n\
+    3・cleaned_file \n\
+    4・total_word \n\
+    5・term_frequency \n\
+    6・inverse_document_frequency \n\
+    7・tf_idf")
     function_choice = int(input("Enter the nuber here : "))
 
 if function_choice == 1 :
@@ -61,6 +63,8 @@ elif function_choice == 3:
     f = open(filepath, 'r')
     print(f.read())
 elif function_choice == 4:
+    total_word()
+elif function_choice == 5:
     tf = tf_dico[speeche_choice]
     tf_cleaned = {}
     for word in tf:
@@ -69,5 +73,5 @@ elif function_choice == 4:
     for key,value in tf_cleaned.items():
         print(key,value)
     
-elif function_choice == 5:
+elif function_choice == 6:
     tf_idf()
