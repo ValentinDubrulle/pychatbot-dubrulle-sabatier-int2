@@ -1,4 +1,4 @@
-import os
+import os        #Import os, string, math from the python librairy
 import string
 import math
 
