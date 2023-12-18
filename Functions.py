@@ -2,7 +2,7 @@ import os        #Import os, string, math from the python librairy
 import string
 import math
 
-def list_of_files(directory, extension):
+def list_of_files(directory, extension): 
     files_names = []
     for filename in os.listdir(directory):
         if filename.endswith(extension):
@@ -13,7 +13,7 @@ directory = "./speeches"
 files_names = list_of_files(directory, "txt") #Get a list of files in a directory with a specific extension
 
 c = 2
-def president_name_exact(name_file):
+def president_name_exact(name_file):    #Give only the name of the president
     """
     :param name_file: str
     :return: Only the president's name of the nomination
