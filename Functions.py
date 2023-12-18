@@ -12,7 +12,6 @@ def list_of_files(directory, extension):
 directory = "./speeches"
 files_names = list_of_files(directory, "txt") #Get a list of files in a directory with a specific extension
 
-c = 2
 def president_name_exact(name_file):    #Give only the name of the president
     """
     :param name_file: str
@@ -25,24 +24,28 @@ def president_name_exact(name_file):    #Give only the name of the president
         president_name = president_name[:-4]    #remove ".txt"
     return president_name
 
-
-c = 3
 def first_name_associate_name(president_name):  #Associate the name of the president with his first name 
     if president_name == "Chirac":
-        return ("Chirac","Jacques")
+        return ("Jacques" + '' + "Chirac")
     elif president_name == "Hollande":
-        return("Hollande","François")
+        return("François" + '' + "Hollande")
     elif president_name == "Mitterrand":
-        return("Mitterrand","François")
+        return("François" + '' + "Mitterrand")
     elif president_name == "Sarkozy":
-        return("Sarkozy","Nicolas")
+        return("Nicolas" + '' + "Sarkozy")
     elif president_name == "Giscard dEstaing":
-        return("Giscard dEstaing","Valéry")
+        return("Valéry" + '' + "Giscard dEstaing")
     elif president_name == "Macron":
-        return ("Macron", "Emmanuel")
+        return ("Emmanuel" + ' ' + "Macron")
+
+#first_name_associate_name()
+
+'''def display_president_name(list_president):  # display de la fonction first_name_associate_name
+    for name in list_president:
+        print(name[1],name[0])'''
+        
 
 
-c = 4
 def lower_case(files):   #Convert upper case in lower case 
     for file in files:
         with open ("./speeches/"+ file, "r") as f1:    #Open in read mode the different files in speeches 
@@ -60,7 +63,7 @@ def lower_case(files):   #Convert upper case in lower case
 
 lower_case(files_names)
 
-c = 5
+
 def cleaned_file(files):    #Remove ponctuation and special character
     for file in files:
         ponctuation = "!#$%&()*+,./:;<=>?@[\]^_`{|}~"
@@ -84,8 +87,6 @@ def cleaned_file(files):    #Remove ponctuation and special character
 cleaned_file(files_names)
 
 
-
-c = 6
 def term_frequency(text,word_cpt):
     list_of_words = text.split()
     for word in list_of_words:
@@ -95,7 +96,7 @@ def term_frequency(text,word_cpt):
             word_cpt[word] = 1
     return word_cpt
 
-c = 7
+
 def inverse_document_frequency(directory,final_dictionary_word_cpt):
     number_of_files = len([file for file in os.listdir(directory)])
     idf_score = {}
@@ -110,7 +111,7 @@ def inverse_document_frequency(directory,final_dictionary_word_cpt):
         idf_score[word] = math.log(number_of_files/cpt_of_file_who_contain_word)
     return idf_score
 
-c = 8
+
 def tf_idf_matrix(directory,final_dictionary_word_cpt):
     matrix = []
     names_files = os.listdir(directory)
