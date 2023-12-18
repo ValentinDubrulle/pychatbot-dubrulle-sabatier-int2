@@ -1,8 +1,7 @@
-import os        #Import os, string, math from the python librairy
-import string
+import os
 import math
 
-def list_of_files(directory, extension): 
+def list_of_files(directory, extension):
     files_names = []
     for filename in os.listdir(directory):
         if filename.endswith(extension):
@@ -12,7 +11,8 @@ def list_of_files(directory, extension):
 directory = "./speeches"
 files_names = list_of_files(directory, "txt") #Get a list of files in a directory with a specific extension
 
-def president_name_exact(name_file):    #Give only the name of the president
+
+def president_name_exact(name_file):
     """
     :param name_file: str
     :return: Only the president's name of the nomination
@@ -25,111 +25,123 @@ def president_name_exact(name_file):    #Give only the name of the president
     return president_name
 
 
-def first_name_associate_name(president_name):  #Associate the name of the president with his first name 
+
+def first_name_associate_name(president_name):
     if president_name == "Chirac":
-        return ("Jacques" + ' ' + "Chirac")
+        return ("Chirac","Jacques")
     elif president_name == "Hollande":
-        return("François" + ' ' + "Hollande")
+        return("Hollande","François")
     elif president_name == "Mitterrand":
-        return("François" + ' ' + "Mitterrand")
+        return("Mitterrand","François")
     elif president_name == "Sarkozy":
-        return("Nicolas" + ' ' + "Sarkozy")
+        return("Sarkozy","Nicolas")
     elif president_name == "Giscard dEstaing":
-        return("Valéry" + ' ' + "Giscard dEstaing")
+        return("Giscard dEstaing","Valéry")
     elif president_name == "Macron":
-        return ("Emmanuel" + ' ' + "Macron")
-
-#first_name_associate_name()
-
-'''def display_president_name(list_president):  # display de la fonction first_name_associate_name
-    for name in list_president:
-        print(name[1],name[0])'''
-        
+        return ("Macron", "Emmanuel")
 
 
-def lower_case(files):   #Convert upper case in lower case 
+
+def lower_case(files):
     for file in files:
-        with open ("./speeches/"+ file, "r") as f1:    #Open in read mode the different files in speeches 
+        with open ("./speeches/"+ file, "r",encoding="utf-8") as f1:
             lines = f1.readlines()
             cleaned_line = ""
             for line in lines:
                 for char in line:
-                    if ord(char)<=ord("Z") and ord(char)>=ord("A"): #Check if the character is an upper case or lower case
+                    if ord(char)<=ord("Z") and ord(char)>=ord("A"):
                         cleaned_line += chr(ord(char) + 32)
                     else:
                         cleaned_line += char
-        with open ("./cleaned/"+ file, "w") as f2:     #Create a new file (f2) as a cleaned file (without upper case) for each files in speeches
+        with open ("./cleaned/"+ file, "w",encoding="utf-8") as f2:
             f2.write(cleaned_line)
 
 
 lower_case(files_names)
 
 
-def cleaned_file(files):    #Remove ponctuation and special character
+def cleaned_file(files):
     for file in files:
         ponctuation = "!#$%&()*+,./:;<=>?@[\]^_`{|}~"
         special_case = "-'"
         special_chr = {"é": "e", "è": "e", "ê": "e", "ë": "e", "à": "a", "â": "a", "ä": "a","î": "i", "ï": "i", "ù": "u", "û": "u", "ô": "o", "ö": "o", "ç": "c", "œ": "oe"}
-        with open("./cleaned/"+file,'r') as f:
+        with open("./cleaned/"+file,'r',encoding="utf-8") as f:
             content = f.read()
         cleaning = ''
         for char in content:
-            if char in ponctuation:     
+            if char in ponctuation:
                 cleaning += ''
             elif char in special_chr:
                 cleaning += special_chr[char]
-            elif char in special_case:
+            elif char in special_case or char == '\n':
                 cleaning += ' '
             else:
                 cleaning += char
-        with open("./cleaned/"+file,'w') as f2:     #Add modifications in cleaned file for each speeches
+        with open("./cleaned/"+file,'w',encoding="utf-8") as f2:
             f2.write(cleaning)
 
 cleaned_file(files_names)
 
 
-def term_frequency(text,word_cpt):
-    list_of_words = text.split()
-    for word in list_of_words:
-        if word in word_cpt:
-            word_cpt[word] += 1
-        else:
-            word_cpt[word] = 1
-    return word_cpt
 
 
-def inverse_document_frequency(directory,final_dictionary_word_cpt):
-    number_of_files = len([file for file in os.listdir(directory)])
+def total_word(files):
+    all_word = {}
+    for file in files:
+        with open("./cleaned/" + file, "r",encoding="utf-8") as f:
+            content = f.read()
+            list_of_words = content.split()
+            for word in list_of_words:
+                if word not in all_word:
+                    all_word[word] = 0
+    return all_word
+
+corpus = total_word(files_names)
+
+
+def term_frequency(files,corpus):
+    liste_of_dico = []
+    for file in files:
+        dico_of_word = {}
+        for elt in corpus:
+            dico_of_word[elt] = 0
+        with open("./cleaned/" + file, "r",encoding="utf-8") as f:
+            content = f.read()
+            list_of_words = content.split()
+            for word in list_of_words:
+               dico_of_word[word] += 1
+        liste_of_dico.append(dico_of_word)
+    return liste_of_dico
+
+
+tf_dico = term_frequency(files_names,corpus)
+
+
+
+def inverse_document_frequency(list_of_dico,list_of_word):
+    number_of_files = len(list_of_dico)
     idf_score = {}
-    for word in final_dictionary_word_cpt.keys():
+    for word in list_of_word:
         cpt_of_file_who_contain_word = 0
-        for file in os.listdir(directory):
-            opened_file = os.path.join(directory,file)
-            file_reading = open(opened_file,'r')
-            content = str(file_reading)
-            if word in content:
+        for dico in list_of_dico:
+            if dico[word] > 0:
                 cpt_of_file_who_contain_word += 1
-        idf_score[word] = math.log(number_of_files/cpt_of_file_who_contain_word)
+        idf_score[word] = math.log10(number_of_files/cpt_of_file_who_contain_word)
     return idf_score
 
+idf_dico = inverse_document_frequency(tf_dico,corpus)
 
-def tf_idf_matrix(directory,final_dictionary_word_cpt):
+
+
+def tf_idf(dico_tf,dico_idf):
     matrix = []
-    names_files = os.listdir(directory)
-    columns = [None]
-    for file in names_files:
-        columns.append(file)
-    matrix.append(columns)
-    for word,occurence in final_dictionary_word_cpt.items():
-        if occurence == 1:
-            row = [word]
-            for file in os.listdir(directory):
-                opened_file = os.path.join(directory, file)
-                file_reading = open(opened_file, 'r')
-                content = str(file_reading)
-                if word in file:
-                    row.append(1)
-                else:
-                    row.append(0)
-            matrix.append(row)
+    for word in dico_idf:
+        row = [word]
+        for i in range(len(dico_tf)):
+            row.append(dico_tf[i][word]*dico_idf[word])
+        matrix.append(row)
     return matrix
+
+tf_idf_matrix = tf_idf(tf_dico,idf_dico)
+for elt in tf_idf_matrix:
+    print(elt)
