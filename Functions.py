@@ -55,8 +55,6 @@ def lower_case(files):
                     else:
                         cleaned_line += char
         with open ("./cleaned/"+ file, "w") as f2:
-            print("./cleaned/"+ file)
-            print(cleaned_line)
             f2.write(cleaned_line) 
 
 
