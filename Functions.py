@@ -141,4 +141,3 @@ def tf_idf(dico_tf,dico_idf):
     return matrix
 
 tf_idf_matrix = tf_idf(tf_dico,idf_dico)
-
