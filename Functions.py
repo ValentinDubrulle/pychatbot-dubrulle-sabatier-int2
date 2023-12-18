@@ -2,7 +2,7 @@ import os
 import string
 import math
 
-def list_of_files(directory, extension): 
+def list_of_files(directory, extension):
     files_names = []
     for filename in os.listdir(directory):
         if filename.endswith(extension):
@@ -55,7 +55,7 @@ def lower_case(files):
                     else:
                         cleaned_line += char
         with open ("./cleaned/"+ file, "w") as f2:
-            f2.write(cleaned_line) 
+            f2.write(cleaned_line)
 
 
 lower_case(files_names)
@@ -63,10 +63,22 @@ lower_case(files_names)
 c = 5
 def cleaned_file(files):
     for file in files:
+        ponctuation = "!#$%&()*+,./:;<=>?@[\]^_`{|}~"
+        special_case = "-'"
+        special_chr = {"é": "e", "è": "e", "ê": "e", "ë": "e", "à": "a", "â": "a", "ä": "a","î": "i", "ï": "i", "ù": "u", "û": "u", "ô": "o", "ö": "o", "ç": "c", "œ": "oe"}
         with open("./cleaned/"+file,'r') as f:
             content = f.read()
-        ponctuation = string.punctuation
-        cleaning = ''.join(char for char in content if char not in ponctuation)
+        cleaning = ''
+        for char in content:
+            print(char)
+            if char in ponctuation:
+                cleaning += ''
+            elif char in special_chr:
+                cleaning += special_chr[char]
+            elif char in special_case:
+                cleaning += ' '
+            else:
+                cleaning += char
         with open("./cleaned/"+file,'w') as f2:
             f2.write(cleaning)
 
@@ -74,7 +86,7 @@ cleaned_file(files_names)
 
 
 
-c = 6 
+c = 6
 def term_frequency(text,word_cpt):
     list_of_words = text.split()
     for word in list_of_words:
@@ -84,7 +96,7 @@ def term_frequency(text,word_cpt):
             word_cpt[word] = 1
     return word_cpt
 
-c = 7 
+c = 7
 def inverse_document_frequency(directory,final_dictionary_word_cpt):
     number_of_files = len([file for file in os.listdir(directory)])
     idf_score = {}
@@ -99,7 +111,7 @@ def inverse_document_frequency(directory,final_dictionary_word_cpt):
         idf_score[word] = math.log(number_of_files/cpt_of_file_who_contain_word)
     return idf_score
 
-c = 8 
+c = 8
 def tf_idf_matrix(directory,final_dictionary_word_cpt):
     matrix = []
     names_files = os.listdir(directory)
