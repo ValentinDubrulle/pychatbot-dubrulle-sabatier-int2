@@ -1,18 +1,22 @@
 from Functions import *
+choices = {1: "Nomination_Chirac1.txt", 2: "Nomination_Chirac_2.txt", 3: "Nomination_Giscard dEstaing.txt", 4: "Nomination_Hollande.txt", 5: "Nomination_Macron.txt",\
+           6: "Nomination_Mitterrand1.txt", 7: "Nomination_Mitterrand2.txt", 8: "Nomination_Sarkozy.txt"}
 
+print("Choose the speeche you wish to analyze\n\
+        1・Nomination Chirac 1 \n\
+        2・Nomination Chirac 2 \n\
+        3・Nomination Giscard dEstaing \n\
+        4・Nomination Hollande \n\
+        5・Nomination Macron \n\
+        6・Nomination Mitterand 1 \n\
+        7・Nomination Mitterand 2 \n\
+        8・Nomination Sarkozy ")
 
+ 
+# c = int(input("Choose 1 for the display_president_name function ; 2 for the first_name_associate_name ; \
+            #   3 for the lower_case ; 4 for the cleaned_file ; 5 for the term_frequency ; 6 inverse_document_frequency ; 7 for the tf_idf_matrix")) #Let the user choose the function he needs
 
-def n_function (c):
-    print("Choose 1 for the display_president_name function ; 2 for the first_name_associate_name ; 3 for the lower_case ; 4 for the cleaned_file ; 5 for the term_frequency ; 6 inverse_document_frequency ; 7 for the tf_idf_matrix")
-    c = int(input("Wich functions do you want call ?")) #Let the user choose the function he needs
-
-
-
-def display_president_name(list_president):  # display de la fonction  first_name_associate_name (a intégrer dans le main)
-    for name in list_president:
-        print(name[1],name[0])
-
-
+#display_president_name('Chirac')
 
 '''list_tuple_president_name = []
 for names in files_names:
