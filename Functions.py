@@ -141,3 +141,81 @@ def tf_idf(dico_tf,dico_idf):
     return matrix
 
 tf_idf_matrix = tf_idf(tf_dico,idf_dico)
+
+def lower_question(char):
+    if ord(char)>=ord('A') and ord(char)<=ord('Z'):
+        return chr(ord(char) + 32)
+    else:
+        return char
+
+def clean_question(text):
+    ponctuation = "!#$%&()*+,./:;<=>?@[\]^_`{|}~"
+    special_case = "-'"
+    special_chr = {"é": "e", "è": "e", "ê": "e", "ë": "e", "à": "a", "â": "a", "ä": "a", "î": "i", "ï": "i", "ù": "u", "û": "u", "ô": "o", "ö": "o", "ç": "c", "œ": "oe"}
+    cleaning = ''
+    for char in text:
+        if char in ponctuation:
+            cleaning += ''
+        elif char in special_case:
+            cleaning += ' '
+        elif char in special_chr:
+            cleaning += special_chr[char]
+        else:
+            cleaning += lower_question(char)
+    question_word = cleaning.split()
+    return question_word
+
+def present_terms_in_corpus(corpus,cleaned_question):
+    return [word for word in cleaned_question if word in corpus]
+
+def tf_question(cleaned_question):
+    dico_question = {}
+    for word in cleaned_question:
+        if word in dico_question:
+            dico_question[word] += 1
+        else:
+            dico_question[word] = 1
+    for elt in dico_question:
+        dico_question[elt] = dico_question[elt]/len(cleaned_question)
+    print(dico_question)
+    return dico_question
+
+def tf_idf_question(tf_dico_question,dico_idf):
+    vector = []
+    for word in dico_idf:
+        if word in tf_dico_question:
+            vector.append(tf_dico_question[word]*dico_idf[word])
+        else:
+            vector.append(0)
+    return vector
+
+def scalar_product(vector_A,vector_B):
+    tot = 0
+    for i in range(1,len(vector_A)):
+        tot += vector_A[i] * vector_B[i]
+    return tot
+
+def norm_of_vector(vector):
+    tot = 0
+    for i in range(1,len(vector)):
+        tot += (vector[i])*2
+    tot = math.sqrt(tot)
+    return tot
+
+def similarity(vector_A,vector_B):
+     return scalar_product(vector_A,vector_B)/(norm_of_vector(vector_A)*norm_of_vector(vector_B))
+
+def transpose_matrix(matrix):
+    nb_row = len(matrix)
+    nb_col = len(matrix[0])
+    transposed_matrix = [[matrix[i][j] for i in range(nb_row)] for j in range(nb_col)]
+    return transposed_matrix
+
+def revenant_document(vector_question,transposed_matrix_tf_idf,list_of_files):
+    best_score = 0
+    index = None
+    for i in range(len(transposed_matrix_tf_idf)):
+        current_score = similarity(vector_question,transposed_matrix_tf_idf[i])
+        if current_score > best_score:
+            index = i
+    return list_of_files[index]
