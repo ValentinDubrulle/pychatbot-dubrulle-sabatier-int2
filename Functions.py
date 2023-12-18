@@ -24,17 +24,18 @@ def president_name_exact(name_file):    #Give only the name of the president
         president_name = president_name[:-4]    #remove ".txt"
     return president_name
 
+
 def first_name_associate_name(president_name):  #Associate the name of the president with his first name 
     if president_name == "Chirac":
-        return ("Jacques" + '' + "Chirac")
+        return ("Jacques" + ' ' + "Chirac")
     elif president_name == "Hollande":
-        return("François" + '' + "Hollande")
+        return("François" + ' ' + "Hollande")
     elif president_name == "Mitterrand":
-        return("François" + '' + "Mitterrand")
+        return("François" + ' ' + "Mitterrand")
     elif president_name == "Sarkozy":
-        return("Nicolas" + '' + "Sarkozy")
+        return("Nicolas" + ' ' + "Sarkozy")
     elif president_name == "Giscard dEstaing":
-        return("Valéry" + '' + "Giscard dEstaing")
+        return("Valéry" + ' ' + "Giscard dEstaing")
     elif president_name == "Macron":
         return ("Emmanuel" + ' ' + "Macron")
 
