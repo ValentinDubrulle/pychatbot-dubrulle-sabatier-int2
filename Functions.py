@@ -99,7 +99,7 @@ def total_word(files):  #Counts the iterations of a word in the file
 corpus = total_word(files_names)
 
 
-def term_frequency(files,corpus):  #Counts the occurrence of each word in the file
+def term_frequency(files,corpus):  '''Counts the occurrence of each word in the file'''
     liste_of_dico = []
     for file in files:
         dico_of_word = {}
