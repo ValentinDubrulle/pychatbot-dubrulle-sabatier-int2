@@ -27,7 +27,7 @@ def president_name_exact(name_file):    #Give only the name of the president
 
 
 c = 3
-def first_name_associate_name(president_name):
+def first_name_associate_name(president_name):  #Associate the name of the president with his first name 
     if president_name == "Chirac":
         return ("Chirac","Jacques")
     elif president_name == "Hollande":
@@ -43,18 +43,18 @@ def first_name_associate_name(president_name):
 
 
 c = 4
-def lower_case(files):
+def lower_case(files):   #Convert upper case in lower case 
     for file in files:
-        with open ("./speeches/"+ file, "r") as f1:
+        with open ("./speeches/"+ file, "r") as f1:    #Open in read mode the different speeches 
             lines = f1.readlines()
             cleaned_line = ""
             for line in lines:
                 for char in line:
-                    if ord(char)<=ord("Z") and ord(char)>=ord("A"):
+                    if ord(char)<=ord("Z") and ord(char)>=ord("A"): #Check if the character is an upper case or lower case
                         cleaned_line += chr(ord(char) + 32)
                     else:
                         cleaned_line += char
-        with open ("./cleaned/"+ file, "w") as f2:
+        with open ("./cleaned/"+ file, "w") as f2:     #Create a new file (f2) as a cleaned file (without upper case) for each files in speeches
             f2.write(cleaned_line)
 
 
