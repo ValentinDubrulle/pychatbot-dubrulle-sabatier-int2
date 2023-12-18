@@ -70,7 +70,6 @@ def cleaned_file(files):
             content = f.read()
         cleaning = ''
         for char in content:
-            print(char)
             if char in ponctuation:
                 cleaning += ''
             elif char in special_chr:
