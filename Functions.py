@@ -85,21 +85,21 @@ cleaned_file(files_names)
 
 
 
-def total_word(files):  
-    all_word = {}
+def total_word(files):  #Counts the iterations of a word in the file
+    all_word = {} 
     for file in files:
         with open("./cleaned/" + file, "r",encoding="utf-8") as f:
             content = f.read()
             list_of_words = content.split()
             for word in list_of_words:
                 if word not in all_word:
-                    all_word[word] = 0
+                    all_word[word] = 0  #Use a dictionary to list all the words in the text 
     return all_word
 
 corpus = total_word(files_names)
 
 
-def term_frequency(files,corpus):
+def term_frequency(files,corpus):  #Counts the occurrence of each word in the file
     liste_of_dico = []
     for file in files:
         dico_of_word = {}
@@ -118,7 +118,7 @@ tf_dico = term_frequency(files_names,corpus)
 
 
 
-def inverse_document_frequency(list_of_dico,list_of_word):
+def inverse_document_frequency(list_of_dico,list_of_word):  
     number_of_files = len(list_of_dico)
     idf_score = {}
     for word in list_of_word:
