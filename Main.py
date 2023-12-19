@@ -4,7 +4,6 @@ from random import randint
 
 print("Hi, I'm Raquita ! My wonderful editors create me to analyse texts while they are studying hardly to success their DE in algebra (spoil: they failed).\n\
       If you want to analyse texts enter: analyse,\n\
-      If you want to see my skills enter: skills \n\
       If you want to ask me some questions about texts enter: chat\n\
       If you want to leave me enter: stop")
 while True:
@@ -87,25 +86,6 @@ while True:
         else:
             for row in tf_idf_matrix:
                 print(*row)
-
-    elif choice == "skills":
-        print("Choose the information you want to discover\n\
-                    1・I know the unimportant words of president's speeches\n\
-                    2・I know the word with the highest TF_IDF score \n\
-                    3・I know the most repeated word by Chirac \n\
-                    4・I know the names of presidents how skope of 'Nation' and the one who repeated the most of time\n\
-                    5・I know the names of presidents who spoke about climate and/or ecology")
-        fact_choice = input("Enter the number here : ")
-
-        while fact_choice not in "12345":
-            print("Choose the information you want to discover\n\
-                    1・I know the unimportant words of president's speeches\n\
-                    2・I know the word with the highest TF_IDF score \n\
-                    3・I know the most repeated word by Chirac \n\
-                    4・I know the names of presidents how skope of 'Nation' and the one who repeated the most of time\n\
-                    5・I know the names of presidents who spoke about climate and/or ecology")
-            fact_choice = input("Enter the number here : ")
-
 
     elif choice == "chat":
         sentences = ["How can I help you ? ", "What's your question ? ", "Ask your question ! ", "I'm ready to answer your question ! ",
